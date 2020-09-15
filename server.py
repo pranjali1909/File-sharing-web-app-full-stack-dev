@@ -1,10 +1,12 @@
-from flask import Flask,abort,render_template,request
+from flask import Flask,abort,render_template,request,redirect,session
 from flask_pymongo import PyMongo
 import json
 from cfg import config
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = config['mongo_uri']
+app.secret_key = b'ftcrjcougrufc9fcr/'
+
 mongo = PyMongo(app)
 
 @app.route('/')
@@ -23,8 +25,8 @@ def show_login():
 
 @app.route('/check_login',methods=['POST'])
 def check_login():
-    email = request.form['email5']
-    password = request.form['password5']
+    email = request.form['email']
+    password = request.form['password']
 
     print('Email is: '+ email)
     print('Password is:' + password)
@@ -32,15 +34,38 @@ def check_login():
 
 @app.route('/signup')
 def show_signup():
-    return render_template('signup.html')
+    error =''
+    if 'error' in session:
+        error = session['error']
+    return render_template('signup.html',error=error)
 
 @app.route('/check_signup',methods=['POST'])
 def check_signup():
-    emailid = request.form['email4']
-    passwordid = request.form['password4']
+    try:
+        email = request.form['email']    
+    except KeyError:
+        email=''
     
+    try:
+        password = request.form['password']       
+    except KeyError:
+        password =''
 
-    print('Email is: '+ emailid)
-    print('Password is:' + passwordid)
+    print('Email is: '+ email)
+    print('Password is:' + password)
+
     
-    return 'DONE'    
+    if not len(email) > 0:
+        session['error']='Email is required'
+        return redirect('/signup')
+
+    
+    if not '@' in email or not '.' in email:
+        session['error']='Email is invalid'
+        return redirect('/signup')
+    
+    if not len(password)> 0:
+        session['error']='password is required'
+        return redirect('/signup')
+    
+    return redirect('/login')   

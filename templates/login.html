@@ -1,12 +1,10 @@
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>My Cloud login page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% block title %}
+     MyCloud login page
+{% endblock %}
 
-</head>
-<body>
-    <div class="container" class="w-25 p-3">
+{% block content %}
     <div class="card" style="margin-top:50px" style=" min-height: 200px" class="w-50 p-3">
         <div class="card-body">
             <h2 class="text-center">MY CLOUD</h2>
@@ -14,13 +12,13 @@
 
             <form method="post" action="/check_login">
                 <div class="form-group mt-4">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="email" name="email5" aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group mt-5">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="Password" name="password5">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="Password" name="password" >
                 </div>
                 <div class="text-center mt-5">
                     <button type="submit" class="btn btn-primary">Login</button>
@@ -31,8 +29,7 @@
 
             </div>
         </div>
-      </div>
     </div>
-</body>
+{% endblock %}
 
-</html>
+   

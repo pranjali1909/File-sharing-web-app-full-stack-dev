@@ -3,7 +3,8 @@
 <head>
     <title>My Cloud signup page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <style type='text/css'>
+    </style>
 </head>
 <body>
     <div class="container" class="w-25 p-3">
@@ -11,24 +12,29 @@
         <div class="card-body">
             <h2 class="text-center">MY CLOUD</h2>
             <h5 class="text-center mt-4">Signup To Your Account</h5>
+            {% if error != '' %}
+                <div class="alert alert-danger" role="alert">
+                  {{ error }}
+                </div>
+            {% endif %}
 
-            <form method="post" action="/signup_login"
-                oninput='confirmpassword4.setCustomValidity(confirmpassword4.value != password4.value ? "Passwords do not match." : "")'>
+            <form method="post" action="/check_signup"
+                oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Passwords do not match." : "")'>
                 <div class="form-group mt-4">
                   <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="email" name="email4" aria-describedby="emailHelp" placeholder="Enter email">
+                  <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                   <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group mt-5">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="Password1" name="password4">
+                  <input type="password" class="form-control" id="Password1" name="password">
                 </div>
                 <div class="form-group mt-5">
-                    <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                    <input type="password" class="form-control" id="Password2" name="confirmpassword4">
-                  </div>
+                  <label for="exampleInputConfirmPassword1">Confirm Password</label>
+                  <input type="password" class="form-control" id="Password2" name="confirmpassword">
+                    </div>
                 <div class="text-center mt-5">
-                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                  <button type="submit" class="btn btn-primary">Sign Up</button>
                 </div>
             </form>
             <div class="mt-5 text-center">
